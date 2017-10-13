@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Neticonges</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="menu">
+          <%= link_to 'Accueil', root_path %>
+          <% if connected? %>
+            <%= link_to 'Déconnexion', logout_path %>
+          <% else %>
+            <%= link_to 'Connexion', login_path %>
+          <% end %>
+        </div>
+      </div>
+      <div class="content">
+        <%= yield %>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </body>
+</html>
