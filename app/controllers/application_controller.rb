@@ -1,9 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :are_you_in
+  before_action :are_you_in?, except: [:login]
   protect_from_forgery with: :exception
    helper_method 'connected?'
 
   def connected?
     !session[:user].nil?
+  end
+  def are_you_in?
+    redirect_to login_path unless connected?
   end
 end
