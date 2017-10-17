@@ -15,6 +15,7 @@ class DemandesController < ApplicationController
       render new_demande_path
     end
   end
+
   def demande_params
     params.require(:demande).permit(:debut,:fin,:nb_jours,:type_conges,:motif)
   end
