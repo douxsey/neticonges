@@ -1,7 +1,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="">
-      <%= link_to 'Nouvelle demande', new_demande_path, class: 'btn btn-success' %>
+      <% flash.each do |key,msg| %>
+        <div class="alert alert-<%= key %>">
+          <%= msg %>
+        </div>
+      <% end %>
     </div>
     <div class="">
       <table class="table table-stripped">
@@ -11,6 +15,7 @@
             <th>Fin </td>
             <th>Nombre de jours </th>
             <th>Type de congé </th>
+            <th>Collaborateur </th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -20,14 +25,16 @@
           <td><%= demande.debut.strftime('%d %B %Y') %></td>
           <td><%= demande.fin.strftime('%d %B %Y') %></td>
           <td><%= demande.nb_jours %></td>
-          <td><%= demande.nom_type_conges %></td>
+          <td><%= demande.nom_type_conges%></td>
+          <td><%= demande.utilisateur.prenom + ' ' +demande.utilisateur.nom%></td>
           <td>
-            <%= link_to '', demandes_path, class: 'fa fa-pencil' %>
-            <%= link_to '', demandes_path, class: 'fa fa-times' %>
+            <%= link_to '', show_demande_path(demande.id), class: 'fa fa-eye' %>
           </td>
         </tr>
         <% end %>
       </table>
     </div>
   </div>
+</div>
+<div class="modal fade" id="refus-popup" tabindex="-1" role="dialog" aria-labelledby="myLabel" aria-hidden="true">
 </div>

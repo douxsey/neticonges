@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012124743) do
+ActiveRecord::Schema.define(version: 20171019112407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171012124743) do
     t.boolean "acceptee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "motif_refus"
     t.index ["utilisateur_id"], name: "index_demandes_on_utilisateur_id"
   end
 
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20171012124743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "role"
   end
 
   add_foreign_key "demandes", "utilisateurs"

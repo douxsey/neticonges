@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="">
+    <%= link_to 'Retour à la liste', admin_demande_path, class: 'btn btn-default' %>
+  </div>
+  <div class="col-md-12">
+    <h6>Détails de la demande</h6>
+    <div class="">
+      <strong>Par: </strong>
+      <%= @demande.utilisateur.prenom + ' ' + @demande.utilisateur.nom %>
+    </div>
+    <div class="  ">
+      <strong>Début: </strong>
+      <%= @demande.debut.strftime('%d %B %Y') %>
+    </div>
+    <div class="">
+      <strong>Fin: </strong>
+      <%= @demande.fin.strftime('%d %B %Y') %>
+    </div>
+    <div class="  ">
+      <strong>Nombre de jours: </strong>
+      <%= @demande.nb_jours %>
+    </div>
+    <div class="">
+      <strong>Type de congé: </strong>
+      <%= @demande.nom_type_conges %>
+    </div>
+    <%= form_tag refuser_demande_path, method: :post, class: "form-inline hide-default", id: 'refusForm' do %>
+      <%= text_field_tag(
+          :refus_motif,
+          params[:refus_motif],
+          placeholder: "Motif nak",
+          class: "form-control input-lg"
+      ) %>
+      <%= hidden_field_tag(
+          :id_demande,
+          params[:id_demande]
+      ) %>
+
+      <%= submit_tag(
+          "Valider",
+          class: 'btn btn-default'
+      ) %>
+    <% end %>
+      <!-- <div class="form-group" >
+        <label for="">Motif: </label>
+        <input type="text" id="inputMotif" class="input-lg form-control" name="refus_motif" value="" placeholder="Motif du refus">
+        <input type="hidden" name="id_demande" value="<%= @demande.id %>">
+      </div> -->
+      <!-- <div class="form-group">
+        <button type="submit" class="btn btn-default">
+          Envoyer
+        </button>
+      </div> -->
+
+    <div class="" id="btn_option" >
+        <%= link_to  'Valider', valider_demande_path(@demande.id), class: "btn btn-info" %>
+        <%= link_to 'Refuser', refuser_demande_path(@demande.id), class: "btn btn-warning", :onclick => 'refus_click(event)' %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function refus_click(ev) {
+    ev.preventDefault()
+    var formRefus = $("#refusForm");
+    var btnOption = $("#btn_option");
+    formRefus.fadeIn();
+    btnOption.fadeOut();
+
+  }
+</script>

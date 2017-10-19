@@ -1,12 +1,16 @@
 class AccueilController < ApplicationController
     def login
         if params[:utilisateur]
-        email, password = params[:utilisateur][:email], params[:utilisateur][:password]
-        user = Utilisateur.authenticate(email, password)
+            email, password = params[:utilisateur][:email], params[:utilisateur][:password]
+            user = Utilisateur.authenticate(email, password)
 
             if user
                 session[:user] = user
-                redirect_to root_path
+                if is_admin?
+                  redirect_to admin_demande_path
+                else
+                  redirect_to root_path
+                end
             else
                 @erreur = "Email ou mot de passe incorrect"
                 render :login
